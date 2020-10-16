@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hellopeterlee.github.io</id>
     <title>Gridea</title>
-    <updated>2020-10-16T07:14:52.720Z</updated>
+    <updated>2020-10-16T07:19:12.734Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hellopeterlee.github.io"/>
     <link rel="self" href="https://hellopeterlee.github.io/atom.xml"/>
@@ -10,6 +10,31 @@
     <logo>https://hellopeterlee.github.io/images/avatar.png</logo>
     <icon>https://hellopeterlee.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[用 CSS 控制 SVG 动画]]></title>
+        <id>https://hellopeterlee.github.io/post/yong-css-kong-zhi-svg-dong-hua/</id>
+        <link href="https://hellopeterlee.github.io/post/yong-css-kong-zhi-svg-dong-hua/">
+        </link>
+        <updated>2020-10-16T07:18:39.000Z</updated>
+        <content type="html"><![CDATA[<p>SVG 有很多好处，诸如良好的缩放支持，不用担心屏幕像素密度；较小的文件大小（当然这取决于绘制图像的路径复杂度）；可以使用 CSS 控制 SVG（这点很重要，我们将在此篇文章中利用它）等等。</p>
+<p>我们知道 SVG 应用于 icon 是一个典型的使用场景，而 CSS Animation 同样是一个令人愉悦的 Web 技术，当这两者结合时，oh，amazing~</p>
+<p>SVG 也有内置的动画语法，如 animate,animateMotion 等，非本文讨论范畴（笔者对于此也不是很了解）</p>
+<p>Animation SVG Moon</p>
+<p>是的，style 可以写到 svg 标签内部，这样你可以像引用 svg icon 一样直接使用带有动画 icon。另外的一个好处是，你可以将 svg 用于 img 标签，像使用一个 GIF 一样。下面这个图片就是上面代码所示的 svg 👇</p>
+<p>animation svg</p>
+<p>另外，你甚至可以像这样，提供一个富有交互的 icon（仅支持执行在代码中使用 svg）</p>
+<p>hover animation svg</p>
+<p>Animation unDraw<br>
+undraw.co 是一个非常棒的开源插图库，种类丰富，如果你想用插图丰富一下你的网页、Slide 或其他的任何东西，不妨一试，总能找到称心的。</p>
+<p>偶然间，在 Youtube 上看到 @Dev Ed 发布的一个 Learn to Build An SVG Animation With CSS 视频，想到站在巨人的肩膀上，使用 CSS 将插图动起来将是多么令人振奋。Let's do it~</p>
+<p>animation nature</p>
+<p>emmm.... 动起来了，这里就不贴代码了（图片组成路径复杂导致代码略长），💡 相信你可以轻易找到查看代码的方式。</p>
+<p>如果足够有创意和对 SVG 感兴趣，做一整套 Animation unDraw 也是不错的</p>
+<p>延伸阅读：</p>
+<p>SVG for Developers: Why You Should Be Using Them If You're Not Already<br>
+Box #1 - Galaxies, Hilbert curves and bubble baths.</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://hellopeterlee.github.io/post/hello-gridea/</id>

@@ -2,23 +2,17 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Gridea</title>
+<title>用 CSS 控制 SVG 动画 | Gridea</title>
 <link rel="shortcut icon" href="https://hellopeterlee.github.io/favicon.ico?v=1602832741057">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://hellopeterlee.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Gridea - Atom Feed" href="https://hellopeterlee.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="用 CSS 控制 SVG 动画 | Gridea - Atom Feed" href="https://hellopeterlee.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
-
-🏠 关于本站
-👨‍💻 博主是谁
-⛹ 兴趣爱好
-📬 联系我呀
-..." />
+    <meta name="description" content="SVG 有很多好处，诸如良好的缩放支持，不用担心屏幕像素密度；较小的文件大小（当然这取决于绘制图像的路径复杂度）；可以使用 CSS 控制 SVG（这点很重要，我们将在此篇文章中利用它）等等。
+我们知道 SVG 应用于 icon 是一个典型的..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -81,46 +75,55 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              用 CSS 控制 SVG 动画
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2020-10-16
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <p>SVG 有很多好处，诸如良好的缩放支持，不用担心屏幕像素密度；较小的文件大小（当然这取决于绘制图像的路径复杂度）；可以使用 CSS 控制 SVG（这点很重要，我们将在此篇文章中利用它）等等。</p>
+<p>我们知道 SVG 应用于 icon 是一个典型的使用场景，而 CSS Animation 同样是一个令人愉悦的 Web 技术，当这两者结合时，oh，amazing~</p>
+<p>SVG 也有内置的动画语法，如 animate,animateMotion 等，非本文讨论范畴（笔者对于此也不是很了解）</p>
+<p>Animation SVG Moon</p>
+<p>是的，style 可以写到 svg 标签内部，这样你可以像引用 svg icon 一样直接使用带有动画 icon。另外的一个好处是，你可以将 svg 用于 img 标签，像使用一个 GIF 一样。下面这个图片就是上面代码所示的 svg 👇</p>
+<p>animation svg</p>
+<p>另外，你甚至可以像这样，提供一个富有交互的 icon（仅支持执行在代码中使用 svg）</p>
+<p>hover animation svg</p>
+<p>Animation unDraw<br>
+undraw.co 是一个非常棒的开源插图库，种类丰富，如果你想用插图丰富一下你的网页、Slide 或其他的任何东西，不妨一试，总能找到称心的。</p>
+<p>偶然间，在 Youtube 上看到 @Dev Ed 发布的一个 Learn to Build An SVG Animation With CSS 视频，想到站在巨人的肩膀上，使用 CSS 将插图动起来将是多么令人振奋。Let's do it~</p>
+<p>animation nature</p>
+<p>emmm.... 动起来了，这里就不贴代码了（图片组成路径复杂导致代码略长），💡 相信你可以轻易找到查看代码的方式。</p>
+<p>如果足够有创意和对 SVG 感兴趣，做一整套 Animation unDraw 也是不错的</p>
+<p>延伸阅读：</p>
+<p>SVG for Developers: Why You Should Be Using Them If You're Not Already<br>
+Box #1 - Galaxies, Hilbert curves and bubble baths.</p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hellopeterlee.github.io/post/hello-gridea/">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
         
 
         
