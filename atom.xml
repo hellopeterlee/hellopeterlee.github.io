@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hellopeterlee.github.io</id>
     <title>Gridea</title>
-    <updated>2020-10-16T07:22:26.100Z</updated>
+    <updated>2020-10-16T07:24:31.164Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hellopeterlee.github.io"/>
     <link rel="self" href="https://hellopeterlee.github.io/atom.xml"/>
@@ -33,6 +33,21 @@ undraw.co 是一个非常棒的开源插图库，种类丰富，如果你想用�
 <p>延伸阅读：</p>
 <p>SVG for Developers: Why You Should Be Using Them If You're Not Already<br>
 Box #1 - Galaxies, Hilbert curves and bubble baths.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[关于]]></title>
+        <id>https://hellopeterlee.github.io/post/about/</id>
+        <link href="https://hellopeterlee.github.io/post/about/">
+        </link>
+        <updated>2019-01-25T11:09:48.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
+</blockquote>
+<h2 id="关于本站">🏠 关于本站</h2>
+<h2 id="博主是谁">👨‍💻 博主是谁</h2>
+<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
+<h2 id="联系我呀">📬 联系我呀</h2>
 ]]></content>
     </entry>
     <entry>
