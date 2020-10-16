@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hellopeterlee.github.io</id>
     <title>Gridea</title>
-    <updated>2020-10-16T07:24:31.164Z</updated>
+    <updated>2020-10-16T07:34:47.559Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hellopeterlee.github.io"/>
     <link rel="self" href="https://hellopeterlee.github.io/atom.xml"/>
@@ -10,76 +10,4 @@
     <logo>https://hellopeterlee.github.io/images/avatar.png</logo>
     <icon>https://hellopeterlee.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
-    <entry>
-        <title type="html"><![CDATA[用 CSS 控制 SVG 动画]]></title>
-        <id>https://hellopeterlee.github.io/post/yong-css-kong-zhi-svg-dong-hua/</id>
-        <link href="https://hellopeterlee.github.io/post/yong-css-kong-zhi-svg-dong-hua/">
-        </link>
-        <updated>2020-10-16T07:18:39.000Z</updated>
-        <content type="html"><![CDATA[<p>SVG 有很多好处，诸如良好的缩放支持，不用担心屏幕像素密度；较小的文件大小（当然这取决于绘制图像的路径复杂度）；可以使用 CSS 控制 SVG（这点很重要，我们将在此篇文章中利用它）等等。</p>
-<p>我们知道 SVG 应用于 icon 是一个典型的使用场景，而 CSS Animation 同样是一个令人愉悦的 Web 技术，当这两者结合时，oh，amazing~</p>
-<p>SVG 也有内置的动画语法，如 animate,animateMotion 等，非本文讨论范畴（笔者对于此也不是很了解）</p>
-<p>Animation SVG Moon</p>
-<p>是的，style 可以写到 svg 标签内部，这样你可以像引用 svg icon 一样直接使用带有动画 icon。另外的一个好处是，你可以将 svg 用于 img 标签，像使用一个 GIF 一样。下面这个图片就是上面代码所示的 svg 👇</p>
-<p>animation svg</p>
-<p>另外，你甚至可以像这样，提供一个富有交互的 icon（仅支持执行在代码中使用 svg）</p>
-<p>hover animation svg</p>
-<p>Animation unDraw<br>
-undraw.co 是一个非常棒的开源插图库，种类丰富，如果你想用插图丰富一下你的网页、Slide 或其他的任何东西，不妨一试，总能找到称心的。</p>
-<p>偶然间，在 Youtube 上看到 @Dev Ed 发布的一个 Learn to Build An SVG Animation With CSS 视频，想到站在巨人的肩膀上，使用 CSS 将插图动起来将是多么令人振奋。Let's do it~</p>
-<p>animation nature</p>
-<p>emmm.... 动起来了，这里就不贴代码了（图片组成路径复杂导致代码略长），💡 相信你可以轻易找到查看代码的方式。</p>
-<p>如果足够有创意和对 SVG 感兴趣，做一整套 Animation unDraw 也是不错的</p>
-<p>延伸阅读：</p>
-<p>SVG for Developers: Why You Should Be Using Them If You're Not Already<br>
-Box #1 - Galaxies, Hilbert curves and bubble baths.</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[关于]]></title>
-        <id>https://hellopeterlee.github.io/post/about/</id>
-        <link href="https://hellopeterlee.github.io/post/about/">
-        </link>
-        <updated>2019-01-25T11:09:48.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://hellopeterlee.github.io/post/hello-gridea/</id>
-        <link href="https://hellopeterlee.github.io/post/hello-gridea/">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
-]]></content>
-    </entry>
 </feed>
