@@ -1,15 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hellopeterlee.github.io</id>
-    <title>Gridea</title>
-    <updated>2020-10-17T12:48:30.872Z</updated>
+    <title>Wukong&apos;s Sky</title>
+    <updated>2020-10-17T13:00:17.010Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hellopeterlee.github.io"/>
     <link rel="self" href="https://hellopeterlee.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
     <logo>https://hellopeterlee.github.io/images/avatar.png</logo>
     <icon>https://hellopeterlee.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Gridea</rights>
+    <rights>All rights reserved 2020, Wukong&apos;s Sky</rights>
+    <entry>
+        <title type="html"><![CDATA[一键搭建ssr + mtproxy_go + IPsec VPN server]]></title>
+        <id>https://hellopeterlee.github.io/post/yi-jian-da-jian-ssr-mtproxy_go-ipsec-vpn-server/</id>
+        <link href="https://hellopeterlee.github.io/post/yi-jian-da-jian-ssr-mtproxy_go-ipsec-vpn-server/">
+        </link>
+        <updated>2020-10-17T12:54:42.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="ssr搭建">SSR搭建:</h2>
+<pre><code>wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh
+
+chmod +x shadowsocksR.sh
+
+./shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log
+
+/etc/init.d/shadowsocks start
+</code></pre>
+<p>开启加速：</p>
+<pre><code>git clone -b master https://github.com/flyzy2005/ss-fly
+ss-fly/ss-fly.sh -bbr
+reboot
+
+sysctl net.ipv4.tcp_available_congestion_control
+
+显示成功：
+net.ipv4.tcp_available_congestion_control = bbr cubic reno
+</code></pre>
+<h2 id="mtproxy_go搭建">MTProxy_go搭建</h2>
+<pre><code>wget -N --no-check-certificate https://raw.githubusercontent.com/iiiiiii1/doubi/master/mtproxy_go.sh &amp;&amp; bash mtproxy_go.sh
+
+/etc/init.d/mtproxy-go start
+</code></pre>
+<h2 id="ipsec-vpn-server搭建">IPsec VPN server搭建</h2>
+<pre><code>wget https://git.io/vpnsetup-centos -O vpnsetup.sh &amp;&amp; sudo sh vpnsetup.sh
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[玩客云搭建cups打印服务器]]></title>
         <id>https://hellopeterlee.github.io/post/wan-ke-yun-da-jian-cups-da-yin-fu-wu-qi/</id>

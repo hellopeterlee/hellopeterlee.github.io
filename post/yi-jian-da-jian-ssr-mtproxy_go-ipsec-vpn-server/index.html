@@ -2,23 +2,18 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>玩客云搭建cups打印服务器 | Wukong&#39;s Sky</title>
+<title>一键搭建ssr + mtproxy_go + IPsec VPN server | Wukong&#39;s Sky</title>
 <link rel="shortcut icon" href="https://hellopeterlee.github.io/favicon.ico?v=1602939613314">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://hellopeterlee.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="玩客云搭建cups打印服务器 | Wukong&#39;s Sky - Atom Feed" href="https://hellopeterlee.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="一键搭建ssr + mtproxy_go + IPsec VPN server | Wukong&#39;s Sky - Atom Feed" href="https://hellopeterlee.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="相关命令
-apt-get update
-apt-get upgrade
-apt-get -y install cups avahi-daemon hplip
-systemctl restart cups
-
-..." />
-    <meta name="keywords" content="玩客云,cups" />
+    <meta name="description" content="SSR搭建:
+wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh..." />
+    <meta name="keywords" content="ssr,mtproxy,vpn" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -80,7 +75,7 @@ systemctl restart cups
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              玩客云搭建cups打印服务器
+              一键搭建ssr + mtproxy_go + IPsec VPN server
             </h2>
             <div class="post-info">
               <span>
@@ -90,23 +85,48 @@ systemctl restart cups
                 1 min read
               </span>
               
-                <a href="https://hellopeterlee.github.io/tag/KjrDnvqoW/" class="post-tag">
-                  # 玩客云
+                <a href="https://hellopeterlee.github.io/tag/52yPegui_/" class="post-tag">
+                  # ssr
                 </a>
               
-                <a href="https://hellopeterlee.github.io/tag/7RJsX0sfVu/" class="post-tag">
-                  # cups
+                <a href="https://hellopeterlee.github.io/tag/Vek9AFR8xj/" class="post-tag">
+                  # mtproxy
+                </a>
+              
+                <a href="https://hellopeterlee.github.io/tag/pDfA2xfJsY/" class="post-tag">
+                  # vpn
                 </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h3 id="相关命令">相关命令</h3>
-<pre><code>apt-get update
-apt-get upgrade
-apt-get -y install cups avahi-daemon hplip
-systemctl restart cups
+                <h2 id="ssr搭建">SSR搭建:</h2>
+<pre><code>wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh
+
+chmod +x shadowsocksR.sh
+
+./shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log
+
+/etc/init.d/shadowsocks start
+</code></pre>
+<p>开启加速：</p>
+<pre><code>git clone -b master https://github.com/flyzy2005/ss-fly
+ss-fly/ss-fly.sh -bbr
+reboot
+
+sysctl net.ipv4.tcp_available_congestion_control
+
+显示成功：
+net.ipv4.tcp_available_congestion_control = bbr cubic reno
+</code></pre>
+<h2 id="mtproxy_go搭建">MTProxy_go搭建</h2>
+<pre><code>wget -N --no-check-certificate https://raw.githubusercontent.com/iiiiiii1/doubi/master/mtproxy_go.sh &amp;&amp; bash mtproxy_go.sh
+
+/etc/init.d/mtproxy-go start
+</code></pre>
+<h2 id="ipsec-vpn-server搭建">IPsec VPN server搭建</h2>
+<pre><code>wget https://git.io/vpnsetup-centos -O vpnsetup.sh &amp;&amp; sudo sh vpnsetup.sh
 </code></pre>
 
               </div>
@@ -114,11 +134,9 @@ systemctl restart cups
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li>
-<ul>
-<li><a href="#%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4">相关命令</a></li>
-</ul>
-</li>
+<li><a href="#ssr%E6%90%AD%E5%BB%BA">SSR搭建:</a></li>
+<li><a href="#mtproxy_go%E6%90%AD%E5%BB%BA">MTProxy_go搭建</a></li>
+<li><a href="#ipsec-vpn-server%E6%90%AD%E5%BB%BA">IPsec VPN server搭建</a></li>
 </ul>
 </li>
 </ul>
@@ -128,6 +146,15 @@ systemctl restart cups
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hellopeterlee.github.io/post/wan-ke-yun-da-jian-cups-da-yin-fu-wu-qi/">
+              <h3 class="post-title">
+                玩客云搭建cups打印服务器
+              </h3>
+            </a>
+          </div>
         
 
         
