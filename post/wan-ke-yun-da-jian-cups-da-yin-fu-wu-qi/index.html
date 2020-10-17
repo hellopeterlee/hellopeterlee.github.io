@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>玩客云搭建cups打印服务器 | Wukong&#39;s Sky</title>
-<link rel="shortcut icon" href="https://hellopeterlee.github.io/favicon.ico?v=1602939613314">
+<link rel="shortcut icon" href="https://hellopeterlee.github.io/favicon.ico?v=1602943186648">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://hellopeterlee.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="玩客云搭建cups打印服务器 | Wukong&#39;s Sky - Atom Feed" href="https://hellopeterlee.github.io/atom.xml">
@@ -17,7 +17,8 @@ apt-get upgrade
 apt-get -y install cups avahi-daemon hplip
 systemctl restart cups
 
-..." />
+接下来安装hp的相关插件
+打开网址..." />
     <meta name="keywords" content="玩客云,cups" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -27,7 +28,7 @@ systemctl restart cups
       <div class="main-content">
         <div class="site-header">
   <a href="https://hellopeterlee.github.io">
-  <img class="avatar" src="https://hellopeterlee.github.io/images/avatar.png?v=1602939613314" alt="">
+  <img class="avatar" src="https://hellopeterlee.github.io/images/avatar.png?v=1602943186648" alt="">
   </a>
   <h1 class="site-title">
     Wukong&#39;s Sky
@@ -108,6 +109,17 @@ apt-get upgrade
 apt-get -y install cups avahi-daemon hplip
 systemctl restart cups
 </code></pre>
+<p>接下来安装hp的相关插件<br>
+打开网址 [https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/]<br>
+下载这两个文件：<br>
+hplip-3.16.11-plugin.run，hplip-3.16.11-plugin.run.asc</p>
+<pre><code>wget https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/hplip-3.16.11-plugin.run
+wget https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/hplip-3.16.11-plugin.run.asc
+</code></pre>
+<p><code>sudo hp-plugin -i -g</code><br>
+选择P选项，手动指定hplip-3.16.11-plugin.run位置<br>
+选择y选项，确定安装这个插件</p>
+<p>删除系统自动认出添加上的打印机，然后手动添加（系统会认出相应打印机，选中添加即可）</p>
 
               </div>
               <div class="toc-container">

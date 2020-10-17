@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hellopeterlee.github.io</id>
     <title>Wukong&apos;s Sky</title>
-    <updated>2020-10-17T13:00:17.010Z</updated>
+    <updated>2020-10-17T13:59:49.810Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hellopeterlee.github.io"/>
     <link rel="self" href="https://hellopeterlee.github.io/atom.xml"/>
@@ -56,6 +56,17 @@ apt-get upgrade
 apt-get -y install cups avahi-daemon hplip
 systemctl restart cups
 </code></pre>
+<p>接下来安装hp的相关插件<br>
+打开网址 [https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/]<br>
+下载这两个文件：<br>
+hplip-3.16.11-plugin.run，hplip-3.16.11-plugin.run.asc</p>
+<pre><code>wget https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/hplip-3.16.11-plugin.run
+wget https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/hplip-3.16.11-plugin.run.asc
+</code></pre>
+<p><code>sudo hp-plugin -i -g</code><br>
+选择P选项，手动指定hplip-3.16.11-plugin.run位置<br>
+选择y选项，确定安装这个插件</p>
+<p>删除系统自动认出添加上的打印机，然后手动添加（系统会认出相应打印机，选中添加即可）</p>
 ]]></content>
     </entry>
 </feed>
