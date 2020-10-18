@@ -1,21 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://hellopeterlee.github.io</id>
-    <title>Wukong&apos;s Sky</title>
-    <updated>2020-10-18T15:35:52.969Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://hellopeterlee.github.io"/>
-    <link rel="self" href="https://hellopeterlee.github.io/atom.xml"/>
-    <logo>https://hellopeterlee.github.io/images/avatar.png</logo>
-    <icon>https://hellopeterlee.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Wukong&apos;s Sky</rights>
-    <entry>
-        <title type="html"><![CDATA[Dcat自定义RowAction,模拟确认，并弹出工具表单]]></title>
-        <id>https://hellopeterlee.github.io/post/dcat-zi-ding-yi-rowactionmo-ni-que-ren-bing-dan-chu-gong-ju-biao-dan/</id>
-        <link href="https://hellopeterlee.github.io/post/dcat-zi-ding-yi-rowactionmo-ni-que-ren-bing-dan-chu-gong-ju-biao-dan/">
-        </link>
-        <updated>2020-10-18T15:19:36.000Z</updated>
-        <content type="html"><![CDATA[<ul>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dcat自定义RowAction,模拟确认，并弹出工具表单 | Wukong&#39;s Sky</title>
+<link rel="shortcut icon" href="https://hellopeterlee.github.io/favicon.ico?v=1603035344478">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://hellopeterlee.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Dcat自定义RowAction,模拟确认，并弹出工具表单 | Wukong&#39;s Sky - Atom Feed" href="https://hellopeterlee.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+我的需求是要求点击表格的一个按钮后，先进行一段业务逻辑后再弹出一个表单填写后续内容，
+由于正常的Dcat的RowAction，点击后的confirm，是监控不到取消事件的，所以这里不能使用RowAction里面的confirm，需要调用D..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hellopeterlee.github.io">
+  <img class="avatar" src="https://hellopeterlee.github.io/images/avatar.png?v=1603035344478" alt="">
+  </a>
+  <h1 class="site-title">
+    Wukong&#39;s Sky
+  </h1>
+  <p class="site-description">
+    
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Dcat自定义RowAction,模拟确认，并弹出工具表单
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-10-18
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <ul>
 <li>我的需求是要求点击表格的一个按钮后，先进行一段业务逻辑后再弹出一个表单填写后续内容，</li>
 <li>由于正常的Dcat的RowAction，点击后的confirm，是监控不到取消事件的，所以这里不能使用RowAction里面的confirm，需要调用Dcat.confirm自己实现，弹出后，再访问RowAction里面的handle方法，处理完成后，再调用layer的弹窗，显示出表单</li>
 </ul>
@@ -228,66 +303,77 @@ JS
     }
 
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[一键搭建ssr + mtproxy_go + IPsec VPN server]]></title>
-        <id>https://hellopeterlee.github.io/post/yi-jian-da-jian-ssr-mtproxy_go-ipsec-vpn-server/</id>
-        <link href="https://hellopeterlee.github.io/post/yi-jian-da-jian-ssr-mtproxy_go-ipsec-vpn-server/">
-        </link>
-        <updated>2020-10-17T12:54:42.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="ssr搭建">SSR搭建:</h2>
-<pre><code>wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh
 
-chmod +x shadowsocksR.sh
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
 
-./shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hellopeterlee.github.io/post/yi-jian-da-jian-ssr-mtproxy_go-ipsec-vpn-server/">
+              <h3 class="post-title">
+                一键搭建ssr + mtproxy_go + IPsec VPN server
+              </h3>
+            </a>
+          </div>
+        
 
-/etc/init.d/shadowsocks start
-</code></pre>
-<p>开启加速：</p>
-<pre><code>git clone -b master https://github.com/flyzy2005/ss-fly
-ss-fly/ss-fly.sh -bbr
-reboot
+        
 
-sysctl net.ipv4.tcp_available_congestion_control
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://hellopeterlee.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
 
-显示成功：
-net.ipv4.tcp_available_congestion_control = bbr cubic reno
-</code></pre>
-<h2 id="mtproxy_go搭建">MTProxy_go搭建</h2>
-<pre><code>wget -N --no-check-certificate https://raw.githubusercontent.com/iiiiiii1/doubi/master/mtproxy_go.sh &amp;&amp; bash mtproxy_go.sh
+      </div>
+    </div>
 
-/etc/init.d/mtproxy-go start
-</code></pre>
-<h2 id="ipsec-vpn-server搭建">IPsec VPN server搭建</h2>
-<pre><code>wget https://git.io/vpnsetup-centos -O vpnsetup.sh &amp;&amp; sudo sh vpnsetup.sh
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[玩客云搭建cups打印服务器]]></title>
-        <id>https://hellopeterlee.github.io/post/wan-ke-yun-da-jian-cups-da-yin-fu-wu-qi/</id>
-        <link href="https://hellopeterlee.github.io/post/wan-ke-yun-da-jian-cups-da-yin-fu-wu-qi/">
-        </link>
-        <updated>2020-10-17T12:46:25.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="相关命令">相关命令</h3>
-<pre><code>apt-get update
-apt-get upgrade
-apt-get -y install cups avahi-daemon hplip
-systemctl restart cups
-</code></pre>
-<p>接下来安装hp的相关插件<br>
-打开网址 [https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/]<br>
-下载这两个文件：<br>
-hplip-3.16.11-plugin.run，hplip-3.16.11-plugin.run.asc</p>
-<pre><code>wget https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/hplip-3.16.11-plugin.run
-wget https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/hplip-3.16.11-plugin.run.asc
-</code></pre>
-<p><code>sudo hp-plugin -i -g</code><br>
-选择P选项，手动指定hplip-3.16.11-plugin.run位置<br>
-选择y选项，确定安装这个插件</p>
-<p>删除系统自动认出添加上的打印机，然后手动添加（系统会认出相应打印机，选中添加即可）</p>
-]]></content>
-    </entry>
-</feed>
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
