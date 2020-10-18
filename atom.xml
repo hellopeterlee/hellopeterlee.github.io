@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hellopeterlee.github.io</id>
     <title>Wukong&apos;s Sky</title>
-    <updated>2020-10-18T15:36:57.161Z</updated>
+    <updated>2020-10-18T15:58:15.887Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hellopeterlee.github.io"/>
     <link rel="self" href="https://hellopeterlee.github.io/atom.xml"/>
@@ -190,7 +190,7 @@ class GetOrderAction extends RowAction
             layer.open({
                 type : 2,
                 content:'{$url}',
-                area: [&quot;50%&quot;,&quot;600px&quot;],
+                area: [&quot;800px&quot;,&quot;600px&quot;],
                 end: function(){
                   parent &amp;&amp; parent.location.reload();
                 }
