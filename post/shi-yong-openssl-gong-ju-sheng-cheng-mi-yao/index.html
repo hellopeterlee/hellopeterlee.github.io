@@ -1,0 +1,237 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>使用OpenSSL工具生成密钥 | Wukong&#39;s Sky</title>
+<link rel="shortcut icon" href="https://hellopeterlee.github.io/favicon.ico?v=1603181595712">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://hellopeterlee.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="使用OpenSSL工具生成密钥 | Wukong&#39;s Sky - Atom Feed" href="https://hellopeterlee.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="文章链接
+第一步 生成RSA密钥
+首先进入OpenSSL工具，输入以下命令：
+OpenSSL&gt; genrsa -out app_private_key.pem   2048  #生成私钥
+
+OpenSSL&gt; pkcs8 -top..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hellopeterlee.github.io">
+  <img class="avatar" src="https://hellopeterlee.github.io/images/avatar.png?v=1603181595712" alt="">
+  </a>
+  <h1 class="site-title">
+    Wukong&#39;s Sky
+  </h1>
+  <p class="site-description">
+    
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              使用OpenSSL工具生成密钥
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-10-20
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p><a href="https://opendocs.alipay.com/open/291/106130">文章链接</a></p>
+<h2 id="第一步-生成rsa密钥">第一步 生成RSA密钥</h2>
+<p>首先进入OpenSSL工具，输入以下命令：</p>
+<pre><code class="language-shell">OpenSSL&gt; genrsa -out app_private_key.pem   2048  #生成私钥
+
+OpenSSL&gt; pkcs8 -topk8 -inform PEM -in app_private_key.pem -outform PEM -nocrypt -out app_private_key_pkcs8.pem #Java开发者需要将私钥转换成PKCS8格式
+
+OpenSSL&gt; rsa -in app_private_key.pem -pubout -out app_public_key.pem #生成公钥
+
+OpenSSL&gt; exit #退出OpenSSL程序
+</code></pre>
+<p>经过以上步骤，开发者可以在当前文件夹中（OpenSSL运行文件夹），看到:<br>
+app_private_key.pem（开发者RSA私钥，非 Java 语言适用）、<br>
+app_private_key_pkcs8.pem（pkcs8格式开发者RSA私钥，Java语言适用）和<br>
+app_public_key.pem（开发者RSA公钥）3个文件。<br>
+开发者将私钥保留，将公钥提交给支付宝配置到开发平台，用于验证签名。</p>
+<p>以下为私钥文件和公钥文件示例。</p>
+<p>TIPS：对于使用Java的开发者，需将生成的pkcs8格式的私钥去除头尾、换行和空格，作为私钥填入代码中，对于.NET和PHP的开发者来说，无需进行pkcs8命令行操作。</p>
+<p>标准的私钥文件示例（PHP、.NET使用）</p>
+<pre><code>-----BEGIN RSA PRIVATE KEY-----
+
+MIICXQIBAAKBgQC+L0rfjLl3neHleNMOsYTW8r0QXZ5RVb2p/vvY3fJNNugvJ7lo4+fdBz+LN4mDxTz4MTOhi5e2yeAqx+v3nKpNmPzC5LmDjhHZURhwbqFtIpZD51mOfno2c3MDwlrsVi6mTypbNu4uaQzw/TOpwufSLWF7k6p2pLoVmmqJzQiD0QIDAQABAoGAakB1risquv9D4zX7hCv9MTFwGyKSfpJOYhkIjwKAik7wrNeeqFEbisqv35FpjGq3Q1oJpGkem4pxaLVEyZOHONefZ9MGVChT/MNH5b0FJYWl392RZy8KCdq376Vt4gKVlABvaV1DkapL+nLh7LMo/bENudARsxD55IGObMU19lkCQQDwHmzWPMHfc3kdY6AqiLrOss+MVIAhQqZOHhDe0aW2gZtwiWeYK1wB/fRxJ5esk1sScOWgzvCN/oGJLhU3kipHAkEAysNoSdG2oWADxlIt4W9kUiiiqNgimHGMHPwp4JMxupHMTm7D9XtGUIiDijZxunHv3kvktNfWj3Yji0661zHVJwJBAM8TDf077F4NsVc9AXVs8N0sq3xzqwQD/HPFzfq6hdR8tVY5yRMb4X7+SX4EDPORKKsgnYcur5lk8MUi7r072iUCQQC8xQvUne+fcdpRyrR4StJlQvucogwjTKMbYRBDygXkIlTJOIorgudFlrKP/HwJDoY4uQNl8gQJb/1LdrKwIe7FAkBl0TNtfodGrDXBHwBgtN/t3pyi+sz7OpJdUklKE7zMSBuLd1E3O4JMzvWP9wEE7JDb+brjgK4/cxxUHUTkk592
+
+-----END RSA PRIVATE KEY-----
+</code></pre>
+<p>PKCS8处理后的私钥文件示例（Java使用）</p>
+<pre><code>MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAN0yqPkLXlnhM+2H/57aHsYHaHXazr9pFQun907TMvmbR04wHChVsKVgGUF1hC0FN9hfeYT5v2SXg1WJSg2tSgk7F29SpsF0I36oSLCIszxdu7ClO7c22mxEVuCjmYpJdqb6XweAZzv4Is661jXP4PdrCTHRdVTU5zR9xUByiLSVAgMBAAECgYEAhznORRonHylm9oKaygEsqQGkYdBXbnsOS6busLi6xA+iovEUdbAVIrTCG9t854z2HAgaISoRUKyztJoOtJfI1wJaQU+XL+U3JIh4jmNx/k5UzJijfvfpT7Cv3ueMtqyAGBJrkLvXjiS7O5ylaCGuB0Qz711bWGkRrVoosPM3N6ECQQD8hVQUgnHEVHZYtvFqfcoq2g/onPbSqyjdrRu35a7PvgDAZx69Mr/XggGNTgT3jJn7+2XmiGkHM1fd1Ob/3uAdAkEA4D7aE3ZgXG/PQqlm3VbE/+4MvNl8xhjqOkByBOY2ZFfWKhlRziLEPSSAh16xEJ79WgY9iti+guLRAMravGrs2QJBAOmKWYeaWKNNxiIoF7/4VDgrcpkcSf3uRB44UjFSn8kLnWBUPo6WV+x1FQBdjqRviZ4NFGIP+KqrJnFHzNgJhVUCQFzCAukMDV4PLfeQJSmna8PFz2UKva8fvTutTryyEYu+PauaX5laDjyQbc4RIEMU0Q29CRX3BA8WDYg7YPGRdTkCQQCG+pjU2FB17ZLuKRlKEdtXNV6zQFTmFc1TKhlsDTtCkWs/xwkoCfZKstuV3Uc5J4BNJDkQOGm38pDRPcUDUh2/
+</code></pre>
+<p>公钥文件示例</p>
+<pre><code>-----BEGIN PUBLIC KEY-----
+
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQWiDVZ7XYxa4CQsZoB3n7bfxLDkeGKjyQPt2FUtm4TWX9OYrd523iw6UUqnQ+Evfw88JgRnhyXadp+vnPKP7unormYQAfsM/CxzrfMoVdtwSiGtIJB4pfyRXjA+KL8nIa2hdQy5nLfgPVGZN4WidfUY/QpkddCVXnZ4bAUaQjXQIDAQAB
+
+-----END PUBLIC KEY-----
+</code></pre>
+<h2 id="第二步-处理应用公钥格式">第二步 处理应用公钥格式</h2>
+<p>将公钥文件去除头尾、换行和空格，转成一行字符串。把该字符串提供给支付宝账号管理者，登录开放平台上传应用公钥并获取支付宝公钥，可以参考 <a href="https://opendocs.alipay.com/open/291/105971">如何获取支付宝公钥</a>。<br>
+例如转换前公钥pem文件格式：</p>
+<pre><code>-----BEGIN PUBLIC KEY-----
+
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQWiDVZ7XYxa4CQsZoB3n7bfxLDkeGKjyQPt2FUtm4TWX9OYrd523iw6UUqnQ+Evfw88JgRnhyXadp+vnPKP7unormYQAfsM/CxzrfMoVdtwSiGtIJB4pfyRXjA+KL8nIa2hdQy5nLfgPVGZN4WidfUY/QpkddCVXnZ4bAUaQjXQIDAQAB
+
+-----END PUBLIC KEY-----
+</code></pre>
+<p>转换后得到的字符串为：</p>
+<pre><code>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQWiDVZ7XYxa4CQsZoB3n7bfxLDkeGKjyQPt2FUtm4TWX9OYrd523iw6UUqnQ+Evfw88JgRnhyXadp+vnPKP7unormYQAfsM/CxzrfMoVdtwSiGtIJB4pfyRXjA+KL8nIa2hdQy5nLfgPVGZN4WidfUY/QpkddCVXnZ4bAUaQjXQIDAQAB
+</code></pre>
+<h2 id="第三步-处理支付宝公钥格式针对文本读取方式">第三步 处理支付宝公钥格式(针对文本读取方式)</h2>
+<p>上一步获取到支付宝公钥，用于支付宝返回数据的验签。</p>
+<p>对于支付宝公钥，看到的是一个字符串，如下：</p>
+<pre><code>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDI6d306Q8fIfCOaTXyiUeJHkrIvYISRcc73s3vF1ZT7XN8RNPwJxo8pWaJMmvyTn9N4HQ632qJBVHf8sxHi/fEsraprwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUrCmZYI/FCEa3/cNMW0QIDAQAB
+</code></pre>
+<p>如果需要使用文件方式（如PHP/.NET版本）读取支付宝公钥，需要在头尾加入标示后保存至文件，文件内容如下：</p>
+<pre><code>-----BEGIN PUBLIC KEY-----
+
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDI6d306Q8fIfCOaTXyiUeJHkrIvYISRcc73s3vF1ZT7XN8RNPwJxo8pWaJMmvyTn9N4HQ632qJBVHf8sxHi/fEsraprwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUrCmZYI/FCEa3/cNMW0QIDAQAB
+
+-----END PUBLIC KEY-----
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%94%9F%E6%88%90rsa%E5%AF%86%E9%92%A5">第一步 生成RSA密钥</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E5%A4%84%E7%90%86%E5%BA%94%E7%94%A8%E5%85%AC%E9%92%A5%E6%A0%BC%E5%BC%8F">第二步 处理应用公钥格式</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-%E5%A4%84%E7%90%86%E6%94%AF%E4%BB%98%E5%AE%9D%E5%85%AC%E9%92%A5%E6%A0%BC%E5%BC%8F%E9%92%88%E5%AF%B9%E6%96%87%E6%9C%AC%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F">第三步 处理支付宝公钥格式(针对文本读取方式)</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hellopeterlee.github.io/post/dcat-zi-ding-yi-rowactionmo-ni-que-ren-bing-dan-chu-gong-ju-biao-dan/">
+              <h3 class="post-title">
+                Dcat自定义RowAction,模拟确认，并弹出工具表单
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://hellopeterlee.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
