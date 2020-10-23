@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>玩客云搭建cups打印服务器 | Wukong&#39;s Sky</title>
-<link rel="shortcut icon" href="https://hellopeterlee.github.io/favicon.ico?v=1603182062804">
+<link rel="shortcut icon" href="https://hellopeterlee.github.io/favicon.ico?v=1603459072903">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://hellopeterlee.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="玩客云搭建cups打印服务器 | Wukong&#39;s Sky - Atom Feed" href="https://hellopeterlee.github.io/atom.xml">
@@ -17,8 +17,7 @@ apt-get upgrade
 apt-get -y install cups avahi-daemon hplip
 systemctl restart cups
 
-接下来安装hp的相关插件
-打开网址..." />
+vi /etc/cups/cups..." />
     <meta name="keywords" content="玩客云,cups" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -28,7 +27,7 @@ systemctl restart cups
       <div class="main-content">
         <div class="site-header">
   <a href="https://hellopeterlee.github.io">
-  <img class="avatar" src="https://hellopeterlee.github.io/images/avatar.png?v=1603182062804" alt="">
+  <img class="avatar" src="https://hellopeterlee.github.io/images/avatar.png?v=1603459072903" alt="">
   </a>
   <h1 class="site-title">
     Wukong&#39;s Sky
@@ -88,7 +87,7 @@ systemctl restart cups
                 2020-10-17
               </span>
               <span>
-                1 min read
+                7 min read
               </span>
               
                 <a href="https://hellopeterlee.github.io/tag/KjrDnvqoW/" class="post-tag">
@@ -109,6 +108,200 @@ apt-get upgrade
 apt-get -y install cups avahi-daemon hplip
 systemctl restart cups
 </code></pre>
+<p>vi /etc/cups/cupsd.conf</p>
+<pre><code>#
+# Configuration file for the CUPS scheduler.  See &quot;man cupsd.conf&quot; for a
+# complete description of this file.
+#
+
+# Log general information in error_log - change &quot;warn&quot; to &quot;debug&quot;
+# for troubleshooting...
+LogLevel warn
+PageLogFormat
+
+# Deactivate CUPS' internal logrotating, as we provide a better one, especially
+# LogLevel debug2 gets usable now
+MaxLogSize 0
+
+# Only listen for connections from the local machine.
+Listen 631
+Listen /run/cups/cups.sock
+
+# Show shared printers on the local network.
+Browsing On
+BrowseLocalProtocols dnssd
+
+# Default authentication type, when authentication is required...
+DefaultAuthType Basic
+
+# Web interface setting...
+WebInterface Yes
+DefaultEncryption Never
+# Restrict access to the server...
+&lt;Location /&gt;
+  Order allow,deny
+  Allow all
+&lt;/Location&gt;
+
+# Restrict access to the admin pages...
+&lt;Location /admin&gt;
+  Order allow,deny
+  Allow all
+&lt;/Location&gt;
+
+# Restrict access to configuration files...
+&lt;Location /admin/conf&gt;
+  AuthType Default
+  #Require user @SYSTEM
+  Order allow,deny
+&lt;/Location&gt;
+
+# Restrict access to log files...
+&lt;Location /admin/log&gt;
+  AuthType Default
+  #Require user @SYSTEM
+  Order allow,deny
+&lt;/Location&gt;
+
+# Set the default printer/job policies...
+&lt;Policy default&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    #Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default CUPS-Get-Devices&gt;
+    AuthType Default
+    #Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    #Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    #Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+
+# Set the authenticated printer/job policies...
+&lt;Policy authenticated&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    AuthType Default
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    AuthType Default
+    #Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default&gt;
+    AuthType Default
+    #Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    #Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    AuthType Default
+    #Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+
+# Set the kerberized printer/job policies...
+&lt;Policy kerberos&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    AuthType Negotiate
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    AuthType Negotiate
+    #Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default&gt;
+    AuthType Default
+    #Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    #Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    AuthType Negotiate
+    #Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+
+</code></pre>
+<blockquote>
+<p>修改完配置文件后，记得重启一下服务：systemctl restart cups</p>
+</blockquote>
 <p>接下来安装hp的相关插件<br>
 打开网址 [https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/]<br>
 下载这两个文件：<br>
