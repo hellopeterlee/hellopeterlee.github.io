@@ -2,13 +2,82 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hellopeterlee.github.io</id>
     <title>Wukong&apos;s Sky</title>
-    <updated>2020-10-23T13:17:55.518Z</updated>
+    <updated>2021-10-03T01:21:02.529Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hellopeterlee.github.io"/>
     <link rel="self" href="https://hellopeterlee.github.io/atom.xml"/>
     <logo>https://hellopeterlee.github.io/images/avatar.png</logo>
     <icon>https://hellopeterlee.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Wukong&apos;s Sky</rights>
+    <rights>All rights reserved 2021, Wukong&apos;s Sky</rights>
+    <entry>
+        <title type="html"><![CDATA[让你的SSH通过HTTP代理或者SOCKS5代理]]></title>
+        <id>https://hellopeterlee.github.io/post/rang-ni-de-ssh-tong-guo-http-dai-li-huo-zhe-socks5-dai-li/</id>
+        <link href="https://hellopeterlee.github.io/post/rang-ni-de-ssh-tong-guo-http-dai-li-huo-zhe-socks5-dai-li/">
+        </link>
+        <updated>2021-10-03T01:13:59.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="socks5代理">socks5代理</h2>
+<p>有时候你的SSH因为某些原因, 或者你的VPS的SSH端口被某些无法阻挡的力量被封禁了, 你使用普通的SSH方式无法登录你的服务器, 所以这时候我们需要使用一些方式, 让你的SSH通过代理链接你的服务器, 进而解决这个问题.</p>
+<h2 id="直接配置">直接配置</h2>
+<p>如何让你的ssh链接使用socks代理呢, 我们可以使用nc命令, 使用ssh的ProxyCommand配合nc可以让ssh通过你设置的代理访问服务器</p>
+<pre><code>$ ssh -o ProxyCommand=&quot;nc -X 5 -x 127.0.0.1:1080 %h %p&quot; root@server
+</code></pre>
+<p>其中使用ProxyCommand命令, 带上具体内容nc -X 5 -x 127.0.0.1:1080 %h %p, 127.0.0.1:1080是你的代理实际地址和端口 最后边的root@server是你需要登录的服务器和用户名</p>
+<p>nc命令的常用参数:</p>
+<p>-X是指定代理协议</p>
+<ul>
+<li>
+<p>4是socks4协议</p>
+</li>
+<li>
+<p>5是socks5协议<br>
+-x是指定代理服务器和端口[代理服务器:端口]</p>
+</li>
+<li>
+<p>默认socks使用1080</p>
+</li>
+<li>
+<p>HTTPS使用3128</p>
+</li>
+</ul>
+<h3 id="alias">alias</h3>
+<p>使用alias方式也可以:</p>
+<p>打开你的.bashrc或者.zshrc配置alias</p>
+<pre><code>$ vim ~/.bashrc
+
+alias connserver=ssh -o ProxyCommand=&quot;nc -X 5 -x 127.0.0.1:1080 %h %p&quot; root@server
+</code></pre>
+<p>保存退出后输入一下:</p>
+<pre><code>$ source ~/.bashrc
+</code></pre>
+<p>下次我们访问服务器的时候直接输入connserver就行</p>
+<pre><code>$ connserver
+</code></pre>
+<h2 id="config方式">config方式</h2>
+<p>我们也可以使用ssh的config配置</p>
+<p>编辑ssh的配置文件, 没有这个文件的话, 自己创建一下:</p>
+<pre><code>$ vim ~/.ssh/config
+</code></pre>
+<p>然后写入一些命令</p>
+<pre><code>Host *
+    ProxyCommand nc -X 5 -x 127.0.0.1:1080 %h %p
+</code></pre>
+<p>下次使用ssh的时候就不需要配置代理了</p>
+<h2 id="http代理">HTTP代理</h2>
+<p>有时候你没有socks代理的时候, 我们借助corkscrew可以让ssh使用HTTP代理</p>
+<p>由于我这里是macOS系统, 我就直接用brew安装corkscrew:</p>
+<pre><code>$ brew install corkscrew
+</code></pre>
+<p>安装完成之后我们打开ssh的config文件修改成使用corkscrew的http代理方式:</p>
+<pre><code>$ vim ~/.ssh/config
+</code></pre>
+<p>写入:</p>
+<pre><code>ProxyCommand /usr/local/bin/corkscrew 127.0.0.1 8080 %h %p
+</code></pre>
+<p>/usr/local/bin/corkscrew是corkscrew的可执行文件路径, 如果您和我的不一样, 可以修改成正确的地址</p>
+<p>127.0.0.1 8080是你的HTTP代理端口, 注意中间有空格, 保存退出后这个时候ssh可以通过你设置的http代理进行访问你的服务器了.</p>
+<p>注意,这种方式生效是全局的, 可能会影响到你的git 使用ssh的方式clone或者push</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[使用OpenSSL工具生成密钥]]></title>
         <id>https://hellopeterlee.github.io/post/shi-yong-openssl-gong-ju-sheng-cheng-mi-yao/</id>
@@ -34,31 +103,46 @@ app_public_key.pem（开发者RSA公钥）3个文件。<br>
 <p>以下为私钥文件和公钥文件示例。</p>
 <p>TIPS：对于使用Java的开发者，需将生成的pkcs8格式的私钥去除头尾、换行和空格，作为私钥填入代码中，对于.NET和PHP的开发者来说，无需进行pkcs8命令行操作。</p>
 <p>标准的私钥文件示例（PHP、.NET使用）</p>
-<p>-----BEGIN RSA PRIVATE KEY-----</p>
-<p>MIICXQIBAAKBgQC+L0rfjLl3neHleNMOsYTW8r0QXZ5RVb2p/vvY3fJNNugvJ7lo4+fdBz+LN4mDxTz4MTOhi5e2yeAqx+v3nKpNmPzC5LmDjhHZURhwbqFtIpZD51mOfno2c3MDwlrsVi6mTypbNu4uaQzw/TOpwufSLWF7k6p2pLoVmmqJzQiD0QIDAQABAoGAakB1risquv9D4zX7hCv9MTFwGyKSfpJOYhkIjwKAik7wrNeeqFEbisqv35FpjGq3Q1oJpGkem4pxaLVEyZOHONefZ9MGVChT/MNH5b0FJYWl392RZy8KCdq376Vt4gKVlABvaV1DkapL+nLh7LMo/bENudARsxD55IGObMU19lkCQQDwHmzWPMHfc3kdY6AqiLrOss+MVIAhQqZOHhDe0aW2gZtwiWeYK1wB/fRxJ5esk1sScOWgzvCN/oGJLhU3kipHAkEAysNoSdG2oWADxlIt4W9kUiiiqNgimHGMHPwp4JMxupHMTm7D9XtGUIiDijZxunHv3kvktNfWj3Yji0661zHVJwJBAM8TDf077F4NsVc9AXVs8N0sq3xzqwQD/HPFzfq6hdR8tVY5yRMb4X7+SX4EDPORKKsgnYcur5lk8MUi7r072iUCQQC8xQvUne+fcdpRyrR4StJlQvucogwjTKMbYRBDygXkIlTJOIorgudFlrKP/HwJDoY4uQNl8gQJb/1LdrKwIe7FAkBl0TNtfodGrDXBHwBgtN/t3pyi+sz7OpJdUklKE7zMSBuLd1E3O4JMzvWP9wEE7JDb+brjgK4/cxxUHUTkk592</p>
-<p>-----END RSA PRIVATE KEY-----</p>
+<pre><code>-----BEGIN RSA PRIVATE KEY-----
+
+MIICXQIBAAKBgQC+L0rfjLl3neHleNMOsYTW8r0QXZ5RVb2p/vvY3fJNNugvJ7lo4+fdBz+LN4mDxTz4MTOhi5e2yeAqx+v3nKpNmPzC5LmDjhHZURhwbqFtIpZD51mOfno2c3MDwlrsVi6mTypbNu4uaQzw/TOpwufSLWF7k6p2pLoVmmqJzQiD0QIDAQABAoGAakB1risquv9D4zX7hCv9MTFwGyKSfpJOYhkIjwKAik7wrNeeqFEbisqv35FpjGq3Q1oJpGkem4pxaLVEyZOHONefZ9MGVChT/MNH5b0FJYWl392RZy8KCdq376Vt4gKVlABvaV1DkapL+nLh7LMo/bENudARsxD55IGObMU19lkCQQDwHmzWPMHfc3kdY6AqiLrOss+MVIAhQqZOHhDe0aW2gZtwiWeYK1wB/fRxJ5esk1sScOWgzvCN/oGJLhU3kipHAkEAysNoSdG2oWADxlIt4W9kUiiiqNgimHGMHPwp4JMxupHMTm7D9XtGUIiDijZxunHv3kvktNfWj3Yji0661zHVJwJBAM8TDf077F4NsVc9AXVs8N0sq3xzqwQD/HPFzfq6hdR8tVY5yRMb4X7+SX4EDPORKKsgnYcur5lk8MUi7r072iUCQQC8xQvUne+fcdpRyrR4StJlQvucogwjTKMbYRBDygXkIlTJOIorgudFlrKP/HwJDoY4uQNl8gQJb/1LdrKwIe7FAkBl0TNtfodGrDXBHwBgtN/t3pyi+sz7OpJdUklKE7zMSBuLd1E3O4JMzvWP9wEE7JDb+brjgK4/cxxUHUTkk592
+
+-----END RSA PRIVATE KEY-----
+</code></pre>
 <p>PKCS8处理后的私钥文件示例（Java使用）</p>
-<p>MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAN0yqPkLXlnhM+2H/57aHsYHaHXazr9pFQun907TMvmbR04wHChVsKVgGUF1hC0FN9hfeYT5v2SXg1WJSg2tSgk7F29SpsF0I36oSLCIszxdu7ClO7c22mxEVuCjmYpJdqb6XweAZzv4Is661jXP4PdrCTHRdVTU5zR9xUByiLSVAgMBAAECgYEAhznORRonHylm9oKaygEsqQGkYdBXbnsOS6busLi6xA+iovEUdbAVIrTCG9t854z2HAgaISoRUKyztJoOtJfI1wJaQU+XL+U3JIh4jmNx/k5UzJijfvfpT7Cv3ueMtqyAGBJrkLvXjiS7O5ylaCGuB0Qz711bWGkRrVoosPM3N6ECQQD8hVQUgnHEVHZYtvFqfcoq2g/onPbSqyjdrRu35a7PvgDAZx69Mr/XggGNTgT3jJn7+2XmiGkHM1fd1Ob/3uAdAkEA4D7aE3ZgXG/PQqlm3VbE/+4MvNl8xhjqOkByBOY2ZFfWKhlRziLEPSSAh16xEJ79WgY9iti+guLRAMravGrs2QJBAOmKWYeaWKNNxiIoF7/4VDgrcpkcSf3uRB44UjFSn8kLnWBUPo6WV+x1FQBdjqRviZ4NFGIP+KqrJnFHzNgJhVUCQFzCAukMDV4PLfeQJSmna8PFz2UKva8fvTutTryyEYu+PauaX5laDjyQbc4RIEMU0Q29CRX3BA8WDYg7YPGRdTkCQQCG+pjU2FB17ZLuKRlKEdtXNV6zQFTmFc1TKhlsDTtCkWs/xwkoCfZKstuV3Uc5J4BNJDkQOGm38pDRPcUDUh2/</p>
+<pre><code>MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAN0yqPkLXlnhM+2H/57aHsYHaHXazr9pFQun907TMvmbR04wHChVsKVgGUF1hC0FN9hfeYT5v2SXg1WJSg2tSgk7F29SpsF0I36oSLCIszxdu7ClO7c22mxEVuCjmYpJdqb6XweAZzv4Is661jXP4PdrCTHRdVTU5zR9xUByiLSVAgMBAAECgYEAhznORRonHylm9oKaygEsqQGkYdBXbnsOS6busLi6xA+iovEUdbAVIrTCG9t854z2HAgaISoRUKyztJoOtJfI1wJaQU+XL+U3JIh4jmNx/k5UzJijfvfpT7Cv3ueMtqyAGBJrkLvXjiS7O5ylaCGuB0Qz711bWGkRrVoosPM3N6ECQQD8hVQUgnHEVHZYtvFqfcoq2g/onPbSqyjdrRu35a7PvgDAZx69Mr/XggGNTgT3jJn7+2XmiGkHM1fd1Ob/3uAdAkEA4D7aE3ZgXG/PQqlm3VbE/+4MvNl8xhjqOkByBOY2ZFfWKhlRziLEPSSAh16xEJ79WgY9iti+guLRAMravGrs2QJBAOmKWYeaWKNNxiIoF7/4VDgrcpkcSf3uRB44UjFSn8kLnWBUPo6WV+x1FQBdjqRviZ4NFGIP+KqrJnFHzNgJhVUCQFzCAukMDV4PLfeQJSmna8PFz2UKva8fvTutTryyEYu+PauaX5laDjyQbc4RIEMU0Q29CRX3BA8WDYg7YPGRdTkCQQCG+pjU2FB17ZLuKRlKEdtXNV6zQFTmFc1TKhlsDTtCkWs/xwkoCfZKstuV3Uc5J4BNJDkQOGm38pDRPcUDUh2/
+</code></pre>
 <p>公钥文件示例</p>
-<p>-----BEGIN PUBLIC KEY-----</p>
-<p>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQWiDVZ7XYxa4CQsZoB3n7bfxLDkeGKjyQPt2FUtm4TWX9OYrd523iw6UUqnQ+Evfw88JgRnhyXadp+vnPKP7unormYQAfsM/CxzrfMoVdtwSiGtIJB4pfyRXjA+KL8nIa2hdQy5nLfgPVGZN4WidfUY/QpkddCVXnZ4bAUaQjXQIDAQAB</p>
-<p>-----END PUBLIC KEY-----</p>
+<pre><code>-----BEGIN PUBLIC KEY-----
+
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQWiDVZ7XYxa4CQsZoB3n7bfxLDkeGKjyQPt2FUtm4TWX9OYrd523iw6UUqnQ+Evfw88JgRnhyXadp+vnPKP7unormYQAfsM/CxzrfMoVdtwSiGtIJB4pfyRXjA+KL8nIa2hdQy5nLfgPVGZN4WidfUY/QpkddCVXnZ4bAUaQjXQIDAQAB
+
+-----END PUBLIC KEY-----
+</code></pre>
 <h2 id="第二步-处理应用公钥格式">第二步 处理应用公钥格式</h2>
 <p>将公钥文件去除头尾、换行和空格，转成一行字符串。把该字符串提供给支付宝账号管理者，登录开放平台上传应用公钥并获取支付宝公钥，可以参考 <a href="https://opendocs.alipay.com/open/291/105971">如何获取支付宝公钥</a>。<br>
 例如转换前公钥pem文件格式：</p>
-<p>-----BEGIN PUBLIC KEY-----</p>
-<p>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQWiDVZ7XYxa4CQsZoB3n7bfxLDkeGKjyQPt2FUtm4TWX9OYrd523iw6UUqnQ+Evfw88JgRnhyXadp+vnPKP7unormYQAfsM/CxzrfMoVdtwSiGtIJB4pfyRXjA+KL8nIa2hdQy5nLfgPVGZN4WidfUY/QpkddCVXnZ4bAUaQjXQIDAQAB</p>
-<p>-----END PUBLIC KEY-----</p>
+<pre><code>-----BEGIN PUBLIC KEY-----
+
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQWiDVZ7XYxa4CQsZoB3n7bfxLDkeGKjyQPt2FUtm4TWX9OYrd523iw6UUqnQ+Evfw88JgRnhyXadp+vnPKP7unormYQAfsM/CxzrfMoVdtwSiGtIJB4pfyRXjA+KL8nIa2hdQy5nLfgPVGZN4WidfUY/QpkddCVXnZ4bAUaQjXQIDAQAB
+
+-----END PUBLIC KEY-----
+</code></pre>
 <p>转换后得到的字符串为：</p>
-<p>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQWiDVZ7XYxa4CQsZoB3n7bfxLDkeGKjyQPt2FUtm4TWX9OYrd523iw6UUqnQ+Evfw88JgRnhyXadp+vnPKP7unormYQAfsM/CxzrfMoVdtwSiGtIJB4pfyRXjA+KL8nIa2hdQy5nLfgPVGZN4WidfUY/QpkddCVXnZ4bAUaQjXQIDAQAB</p>
+<pre><code>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQWiDVZ7XYxa4CQsZoB3n7bfxLDkeGKjyQPt2FUtm4TWX9OYrd523iw6UUqnQ+Evfw88JgRnhyXadp+vnPKP7unormYQAfsM/CxzrfMoVdtwSiGtIJB4pfyRXjA+KL8nIa2hdQy5nLfgPVGZN4WidfUY/QpkddCVXnZ4bAUaQjXQIDAQAB
+</code></pre>
 <h2 id="第三步-处理支付宝公钥格式针对文本读取方式">第三步 处理支付宝公钥格式(针对文本读取方式)</h2>
 <p>上一步获取到支付宝公钥，用于支付宝返回数据的验签。</p>
 <p>对于支付宝公钥，看到的是一个字符串，如下：</p>
-<p>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDI6d306Q8fIfCOaTXyiUeJHkrIvYISRcc73s3vF1ZT7XN8RNPwJxo8pWaJMmvyTn9N4HQ632qJBVHf8sxHi/fEsraprwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUrCmZYI/FCEa3/cNMW0QIDAQAB</p>
+<pre><code>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDI6d306Q8fIfCOaTXyiUeJHkrIvYISRcc73s3vF1ZT7XN8RNPwJxo8pWaJMmvyTn9N4HQ632qJBVHf8sxHi/fEsraprwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUrCmZYI/FCEa3/cNMW0QIDAQAB
+</code></pre>
 <p>如果需要使用文件方式（如PHP/.NET版本）读取支付宝公钥，需要在头尾加入标示后保存至文件，文件内容如下：</p>
-<p>-----BEGIN PUBLIC KEY-----</p>
-<p>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDI6d306Q8fIfCOaTXyiUeJHkrIvYISRcc73s3vF1ZT7XN8RNPwJxo8pWaJMmvyTn9N4HQ632qJBVHf8sxHi/fEsraprwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUrCmZYI/FCEa3/cNMW0QIDAQAB</p>
-<p>-----END PUBLIC KEY-----</p>
+<pre><code>-----BEGIN PUBLIC KEY-----
+
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDI6d306Q8fIfCOaTXyiUeJHkrIvYISRcc73s3vF1ZT7XN8RNPwJxo8pWaJMmvyTn9N4HQ632qJBVHf8sxHi/fEsraprwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUrCmZYI/FCEa3/cNMW0QIDAQAB
+
+-----END PUBLIC KEY-----
+</code></pre>
 ]]></content>
     </entry>
     <entry>
